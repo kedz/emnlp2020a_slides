@@ -1,0 +1,96 @@
+\subsection{Alignment Training}
+
+\begin{frame}
+    \alert{Alignment Training}
+
+\end{frame}
+
+\begin{frame}{Alignment Training}
+   
+    \resizebox{\textwidth}{!}{
+    \begin{tikzpicture}
+
+   \uncover<1-5>{
+       \node[align=left,text width=10cm,anchor=north west] at (0,0) {\texttt{{\color{mLightBrown}\# Input}\\x = [\\~\\~\\~\\~\\~\\~\\]}};
+   }
+   \uncover<1-2>{
+       \node[anchor=west] at (0.5,-2.8) 
+       {\resizebox{5.5cm}{!}{$\pi = \left( \left[\!\!\!\left[ \begin{array}{l}
+        \textsc{Inform}\\
+        \textrm{\only<2>{\color{Red}}name=Aromi}\\
+        \textrm{\only<2>{\color{Green}}eat\_type=coffee shop}\\
+        \textrm{\only<2>{\color{Blue}}area=city centre}\\
+    \end{array}\right]\!\!\!\right]\right)$ }};
+
+   }
+   \uncover<3>{
+       \node[align=left,text width=10cm,anchor=north west] at (0,0) {\texttt{{\color{mLightBrown}\# Input}\\x = [\\
+                    ~~~~"<start>",\\
+                ~~~~"inform",\\
+                ~~~~{\color{Green}"eat\_type=coffee shop",}\\
+                ~~~~{\color{Blue}"area=city centre",}\\
+                ~~~~{\color{Red}"name=Aromi",}\\
+                ~~~~"<stop>"\\
+            ]\\~
+   }};
+}
+   \uncover<5>{
+       \node[align=left,text width=10cm,anchor=north west] at (0,0) {\texttt{{\color{mLightBrown}\# Input}\\x = [\\
+                    ~~~~"<start>",\\
+                ~~~~"inform",\\
+                ~~~~{\color{Green}"eat\_type=coffee shop",}\\
+                ~~~~{\color{Red}"name=Aromi",}\\
+                ~~~~{\color{Blue}"area=city centre",}\\
+                ~~~~"<stop>"\\
+            ]\\~
+   }};
+}
+   \uncover<1-3>{
+         \node[align=left,text width=5.75cm,anchor=north west] at (6.2,0) {\texttt{{\color{mLightBrown}\# Output}\\y = [\\ 
+                    ~~~~"<start>",\\ 
+                    ~~~~"for",\\
+                    ~~~~\only<1>{"coffee",}\only<2->{{\color{Green}"coffee",}}\\
+                    ~~~~"in",\\
+                    ~~~~"the",\\
+                ~~~~{\only<2->{\color{Blue}}"city",}\\
+            ~~~~{\only<2->{\color{Blue}}"centre",}\\
+                    ~~~~",",\\
+                    ~~~~"try",\\
+                ~~~~{\only<2->{\color{Red}}"aromi",}\\
+                    ~~~~".",\\
+                    ~~~~"<stop>"\\
+                ] \\ ~
+   }};
+   }
+
+   \uncover<4-5>{
+         \node[align=left,text width=5.75cm,anchor=north west] at (6.2,0) {\texttt{{\color{mLightBrown}\# Output}\\y = [\\ 
+                    ~~~~"<start>",\\ 
+                    ~~~~"there",\\
+                    ~~~~"is",\\
+                    ~~~~"a",\\
+                    ~~~~{{\color{Green}"coffee",}}\\
+                    ~~~~{{\color{Green}"shop",}}\\
+                    ~~~~"called",\\
+                ~~~~{\color{Red}"aromi",}\\
+                    ~~~~"in",\\
+                    ~~~~"the",\\
+                ~~~~{\color{Blue}"city",}\\
+            ~~~~{\color{Blue}"centre",}\\
+                    ~~~~".",\\
+                    ~~~~"<stop>"\\
+                ] \\ ~
+   }};
+   }
+
+
+   \draw[mLightBrown!30] (6.2,0) -- (6.2,-8.15);
+   \uncover<4-5>{
+   \draw[mLightBrown!30] (6.2,0) -- (6.2,-9.21);
+   }
+   \draw[mLightBrown!30] (0,0) -- (0,-4.85);
+    \end{tikzpicture}
+}
+\end{frame}
+
+

@@ -1,0 +1,85 @@
+\subsection{Phrase-Based Data Augmentation}
+
+\begin{frame}
+encourage more systematicity 
+not available on xbox, ps, and nintendo. ->
+available on xbox, ps, and nintendo.
+
+\end{frame}
+
+
+\begin{frame}
+\resizebox{\textwidth}{!}{
+\begin{tikzpicture}[sibling distance=10em,level distance=1cm,
+  tn/.style = {shape=rectangle, rounded corners,
+    draw, align=center,
+    top color=white, bottom color=blue!20}]]
+  \node[] {S}
+    child { node[] (IT) {NP} } 
+    child[draw=white] { node[] {} }
+    child { node {\alert<7->{VP}}
+      child { node (IS) {\alert<7->{VBZ}}  }
+      child { node (NOT) {\alert<7->{RB}} }
+      child { node {\alert<6->{ADVP}} 
+        child { node (AVAILABLE) {\alert<6->{ADV}} }   
+        child { node {\alert<5->{S}} 
+            child { node (TO) {\alert<5->{TO}} }
+            child { node {\alert<4->{VP}} 
+                child { node (PLAY) {\alert<4->{VB}}  }
+                child { node {\alert<3->{PP}} 
+                    child { node (ON) {\alert<3->{IN}}  }
+                    child { node {\alert<2->{NP}} child { node (STEAM) {\alert<2->{NNP}}     }  }
+                }
+            }
+        }
+            }}; 
+%        child { node {S} child { node {VP} 
+%            child { node {TO} child {node {to}}  }  
+
+
+ %               }  }   } };
+
+    \node [minimum height=1.0cm,below=7cm of IT] (it) {\Large It};
+    \draw[-] (IT) -- (it);
+
+    \node [minimum height=1.0cm,below=6cm of IS] (is) {\Large \alert<7->{is}};
+    \draw[-] (IS) -- (is);
+
+    \node [minimum height=1.0cm,below=6cm of NOT] (not) {\Large \alert<7->{not}};
+    \draw[-] (NOT) -- (not);
+
+    \node [minimum height=1.0cm,below=5cm of AVAILABLE] (available) {\Large \alert<6->{available}};
+    \draw[-] (AVAILABLE) -- (available);
+
+    \node [minimum height=1.0cm,below=4cm of TO] (to) {\Large \alert<5->{to}};
+    \draw[-] (TO) -- (to);
+
+    \node [minimum height=1.0cm,below=3cm of PLAY] (play) {\Large \alert<4->{play}};
+    \draw[-] (PLAY) -- (play);
+
+    \node [minimum height=1.0cm,below=2cm of ON] (on) {\Large \alert<3->{on}};
+    \draw[-] (ON) -- (on);
+
+    \node [minimum height=1.0cm,below=1cm of STEAM] (steam) {\Large \alert<2->{Linux}};
+    \draw[-] (STEAM) -- (steam);
+
+\uncover<2->{
+    \node[anchor=west] at (-3,-11) {\Large $\left[\!\!\!\left[ \begin{array}{l} \textsc{Inform}\\ \textrm{\alert<7>{has\_linux\_release=}\only<2-6>{yes}\only<7>{\alert{no}}}\end{array} \right]\!\!\!\right], \left[
+  \only<7>{\textit{<<s-VP>>}, \textit{is}, \textit{not}, \textit{available}, \textit{to}, \textit{play}, \textit{on},}
+  \only<6>{\textit{<<s-ADVP>>}, \textit{available}, \textit{to}, \textit{play}, \textit{on},}
+  \only<5>{\textit{<<s-S>>}, \textit{to}, \textit{play}, \textit{on},}
+  \only<4>{\textit{<<s-VP>>}, \textit{play}, \textit{on},} 
+    \only<3>{\textit{<<s-PP>>}, \textit{on},}    
+  \only<2>{\textit{<<s-NP>>},} \textit{linux}, \only<2>{\textit{<<e-NP>>}} 
+    \only<3>{\textit{<<e-PP>>}} 
+\only<4>{\textit{<<e-VP>>}} 
+\only<5>{\textit{<<e-S>>}} 
+\only<6>{\textit{<<e-ADVP>>}}
+\only<7>{\textit{<<e-VP>>}}
+\right]$};
+}
+
+\end{tikzpicture}}
+
+
+\end{frame}

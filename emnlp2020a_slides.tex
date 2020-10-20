@@ -1,0 +1,122 @@
+\documentclass[usenames,dvipsnames]{beamer}
+
+\mode<presentation> {
+    \usetheme{metropolis}
+%\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
+}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usepackage{tikz-3dplot}
+\usetikzlibrary{calc}
+
+
+\newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
+
+\usepackage[normalem]{ulem}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage{graphicx} % Allows including images
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{xspace}
+\usepackage{bbm}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ulem}
+\usepackage[backend=biber]{biblatex}
+\bibliography{cites.bib}
+%\usefonttheme[onlymath]{serif}
+\usefonttheme{serif}
+\setbeamertemplate{navigation symbols}{}
+
+\newcolumntype{g}{>{\columncolor{black!5}}c}
+\newcolumntype{f}{>{\columncolor{black!5}}r}
+\newcolumntype{L}[1]{>{\columncolor{black!5}}m{#1}}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+\usetikzlibrary{arrows}
+\usetikzlibrary{positioning}
+\usepackage[most]{tcolorbox}
+
+
+\newenvironment{indentquote}{%
+      \par%
+        \medskip
+          \leftskip=4em\rightskip=2em%
+            \noindent\ignorespaces}{%
+                  \par\medskip}
+
+\newenvironment{indentquote2}{%
+      \par%
+        \medskip
+          \leftskip=2em\rightskip=2em%
+            \noindent\ignorespaces}{%
+                  \par\medskip}
+
+
+\title[CMR2Text]{Controllable\\Meaning Representation\\to\\Text Generation:\\{\small Linearization and Data-Augmentation Strategies}} 
+
+
+\author[Chris Kedzie]{Chris Kedzie and Kathleen McKeown} 
+\institute[Columbia U.]
+{
+Columbia University\\
+Department of Computer Science\\
+\medskip
+\textit{kedzie@cs.columbia.edu}
+}
+\date{\today} % Date, can be changed to a custom date
+
+
+\newcommand\tocforsect[2]{%
+      \begingroup
+        \edef\safesection{\thesection}
+          \setcounter{section}{#1}
+            \tableofcontents[#2,currentsection]
+              \setcounter{section}{\safesection}
+                \endgroup
+            }
+
+\begin{document}
+
+\begin{frame}
+\titlepage 
+\end{frame}
+
+
+\begin{frame}
+\begin{itemize}
+\item MR 2 Text Generation
+\item CMR 2 Text Generation
+\item  MR 2 Text in S2S models
+\item Alignment Training
+\item Planning models
+\item Some other alignments
+\item Results
+\end{itemize}
+\end{frame}
+
+\input{sections/motivation.tex}
+\begin{frame}{Overview}
+\tableofcontents[ 
+    sectionstyle=show/show, 
+    subsectionstyle=show/show, 
+    ]
+\end{frame}
+
+\section{Controllable Generation}
+
+\input{sections/alignment_training.tex}
+\input{sections/phrase_data_augmentation.tex}
+\input{sections/other_linearization_strategies.tex}
+%\input{sections/utterance_planners.tex}
+
+
+
+
+\end{document}

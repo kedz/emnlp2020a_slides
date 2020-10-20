@@ -1,0 +1,121 @@
+
+\newtcbox{\namebox}[1][]{enhanced, colframe=red, colback=red!15, 
+                       nobeforeafter, tcbox raise base, shrink tight, extrude 
+                       by=0.75mm, #1}
+\newtcbox{\perspbox}[1][]{enhanced, colframe=blue, colback=blue!15, 
+                       nobeforeafter, tcbox raise base, shrink tight, extrude 
+                       by=0.75mm, #1}
+\newtcbox{\rtsbox}[1][]{enhanced, colframe=green, colback=green!15, 
+                       nobeforeafter, tcbox raise base, shrink tight, extrude 
+                       by=0.75mm, #1}
+
+\newtcbox{\psbox}[1][]{enhanced, colframe=orange, colback=orange!15, 
+                       nobeforeafter, tcbox raise base, shrink tight, extrude 
+                       by=0.75mm, #1}
+
+\newtcbox{\pcbox}[1][]{enhanced, colframe=purple, colback=purple!15, 
+                       nobeforeafter, tcbox raise base, shrink tight, extrude 
+                       by=0.75mm, #1}
+
+\newtcbox{\steambox}[1][]{enhanced, colframe=pink, colback=pink!15, 
+                       nobeforeafter, tcbox raise base, shrink tight, extrude 
+                       by=0.75mm, #1}
+
+\newtcbox{\linuxbox}[1][]{enhanced, colframe=yellow, colback=yellow!15, 
+                       nobeforeafter, tcbox raise base, shrink tight, extrude 
+                       by=0.75mm, #1}
+
+\newtcbox{\macbox}[1][]{enhanced, colframe=brown, colback=brown!15, 
+                       nobeforeafter, tcbox raise base, shrink tight, extrude 
+                       by=0.75mm, #1}
+
+\section{Other Linearization Strategies}
+
+\begin{frame}{Other Linearization Strategies}
+
+\textit{\namebox{Age of Empires II} is a \perspbox{bird view}
+\rtsbox{real-time strategy} game that
+was released for \psbox{PlayStation}
+and \pcbox{PC.} It \steambox{isn't available on Steam} 
+and \linuxbox{doesn't have a Linux release}, 
+but it \macbox{does have
+a Mac version.}}
+
+%\texttt{y = ["Age", "of", "Empires", "II", ":", "The", "Age", "of", "Kings", "is", "a", "bird", "view",
+%"real-time", "strategy", "game", "that",
+%"was", "released", "for", "PlayStation",
+%"and", "PC", ".", "It", "is", "n't", "available", "on",
+%"Steam", "and", "does", "n't", "have", "a",
+%"Linux", "release", ",", "but", "it", "does", "have",
+%"a", "Mac", "version", "."]}
+
+\only<1>{
+\texttt{x = [~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\alert{\# \uline{Alignment Training}}\\
+~~~~"inform",\\
+~~~~"name=Age of Empires II",\\
+~~~~"player\_perspective=bird view",\\
+~~~~"genres=real-time strategy",\\
+~~~~"platforms=PlayStation",\\
+~~~~"platforms=PC",\\
+~~~~"available\_on\_steam=no",\\
+~~~~"has\_linux\_release=no",\\
+~~~~"has\_mac\_release=yes"\\
+]}
+}
+
+\only<2>{
+\texttt{x = [~~~~~~~~~~~~~~~~~~~~~~\alert{\# \uline{Random}}\\
+~~~~"inform",~~~~~~~~~~~~~~\alert{\# No correspondance between}\\
+~~~~"platforms=PC",~~~~~~~~\alert{\# order of x and y. } \\
+~~~~"player\_perspective=bird view",\\
+~~~~"available\_on\_steam=no",\\
+~~~~"genres=real-time strategy",\\
+~~~~"name=Age of Empires II",\\
+~~~~"has\_mac\_release=yes"\\
+~~~~"platforms=PlayStation",\\
+~~~~"has\_linux\_release=no",\\
+]}
+}
+
+\only<3>{
+\texttt{x = [~~~~~~~~~~~~~~~~~~~\alert{\# \uline{Increasing Frequency}}\\
+~~~~"inform",~~~~~~~~~~~\alert{\# freq(x[i]) <= freq(x[i+1])}\\
+~~~~"has\_linux\_release=no",\\
+~~~~"has\_mac\_release=yes", \\
+~~~~"available\_on\_steam=no",\\
+~~~~"player\_perspective=bird view",\\
+~~~~"platforms=PlayStation",\\
+~~~~"platforms=PC", \\
+~~~~"genres=real-time strategy",\\
+~~~~"name=Age of Empires II",\\
+]}
+}
+\only<4>{
+\scalebox{0.5}{%
+\begin{minipage}{0.7\textwidth}
+\texttt{x = [\\
+\phantom{oooo}"inform",\\
+\phantom{oooo}"expected\_release\_data=N/A",\\
+\phantom{oooo}"specifier=N/A",\\
+\phantom{oooo}"has\_linux\_release=no",\\
+\phantom{oooo}"has\_mac\_release=yes", \\
+\phantom{oooo}"available\_on\_steam=no",\\
+\phantom{oooo}"esrb\_rating=N/A",\\
+\phantom{oooo}"has\_multiplayer=N/A",\\
+\phantom{oooo}"developer=N/A",\\
+\phantom{oooo}"release\_year=N/A",\\
+\phantom{oooo}"player\_perspective1=bird view",\\
+\phantom{oooo}"player\_perspective2=N/A",\\
+\phantom{oooo}"player\_perspective3=N/A",\\
+\phantom{oooo}"platforms1=PlayStation",\\
+\phantom{oooo}"platforms2=PC", \\
+\phantom{oooo}"platforms3=N/A", \\
+\phantom{oooo}"platforms4=N/A", \\
+\phantom{oooo}"name=Age of Empires II",\\
+\phantom{oooo}"genres1=real-time strategy",\\
+\phantom{oooo}"genres2=N/A",\\
+\phantom{oooo}"genres3=N/A",\\
+\phantom{oooo}"genres4=N/A",\\
+]}
+\end{minipage}}\begin{minipage}{0.5\textwidth} \texttt{\alert{\# Fixed Position}}\vfill ~\\~\\~\\ \end{minipage}} 
+\end{frame}
