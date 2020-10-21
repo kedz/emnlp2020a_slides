@@ -5,6 +5,7 @@
 %\setbeamertemplate{navigation symbols}{} % To remove the navigation symbols from the bottom of all slides uncomment this line
 }
 \usepackage[T1]{fontenc}
+\usepackage{stmaryrd}
 \usepackage{tikz}
 \usepackage{tikz-3dplot}
 \usetikzlibrary{calc}
@@ -59,7 +60,14 @@
                   \par\medskip}
 
 
-\title[CMR2Text]{Controllable\\Meaning Representation\\to\\Text Generation:\\{\small Linearization and Data-Augmentation Strategies}} 
+                  \title[CMR2Text]{AHH}
+%?
+%?          %  $\left[\begin{array}{l}\textrm{Meaning}\\\textrm{Representation}\end{array} \right]$\\
+%?            Controllable{(~~$\llbracket$Meaning Representation$\rrbracket$~~)} \\
+%?                $\underrightarrow{\textrm{~~to~~}}$ ~~~~~\phantom{\texttt{["Text", "Generation"]}}\\
+%?              \phantom{$\underrightarrow{\textrm{~~to~~}}$} \vspace{-2.2em}~~~~~\texttt{["Text", "Generation"]}
+%?            }
+%?%{\small Linearization and Data-Augmentation Strategies}} 
 
 
 \author[Chris Kedzie]{Chris Kedzie and Kathleen McKeown} 
@@ -73,6 +81,38 @@ Department of Computer Science\\
 \date{\today} % Date, can be changed to a custom date
 
 
+\makeatletter
+\setbeamertemplate{title page}{
+  \begin{minipage}[b][\paperheight]{\textwidth}
+    \centering  % <-- Center here
+    \ifx\inserttitlegraphic\@empty\else\usebeamertemplate*{title graphic}\fi
+    \vfill%
+    \ifx\inserttitle\@empty\else\usebeamertemplate*{title}\fi
+    \ifx\insertsubtitle\@empty\else\usebeamertemplate*{subtitle}\fi
+    \usebeamertemplate*{title separator}
+    \ifx\beamer@shortauthor\@empty\else\usebeamertemplate*{author}\fi
+    \ifx\insertdate\@empty\else\usebeamertemplate*{date}\fi
+    \ifx\insertinstitute\@empty\else\usebeamertemplate*{institute}\fi
+    \vfill
+    \vspace*{1mm}
+  \end{minipage}
+}
+
+\setbeamertemplate{title}{
+%  \raggedright%  % <-- Comment here
+  \linespread{1.0}%
+  \inserttitle%
+  \par%
+  \vspace*{0.5em}
+}
+\setbeamertemplate{subtitle}{
+%  \raggedright%  % <-- Comment here
+  \insertsubtitle%
+  \par%
+  \vspace*{0.5em}
+}
+\makeatother
+
 \newcommand\tocforsect[2]{%
       \begingroup
         \edef\safesection{\thesection}
@@ -84,10 +124,43 @@ Department of Computer Science\\
 
 \begin{document}
 
+%\begin{frame}
+%\titlepage 
+%\end{frame}
+\def\vc#1{$\vcenter{\hbox{#1}}$}
 \begin{frame}
-\titlepage 
-\end{frame}
+~\\
+~\\
+~\\
+\resizebox{1.0\textwidth}{!}{%
+{\begin{minipage}{0.90\textwidth}
+{\Large
+    $\textrm{Controllable}_\pi\left(\left[\!\!\!\left[ 
+        \begin{array}{l} 
+            \textrm{Meaning}\\\textrm{Representation}    
+        \end{array} \right]\!\!\!\right]\right)$ }\\
+   \vspace{0ex} $\quad \quad\quad \quad\quad \quad \quad\underrightarrow{\textrm{~~to~~}}$ 
+         {\Large $\begin{array}{c} ~\\[-0.5em] \texttt{["Text", "Generation"]:} \end{array}$}\\
+\end{minipage}}
+}
+~\\
+\begin{center}---\\\textbf{Linearization and Data Augmentation Strategies}\\---\end{center}
 
+    \usebeamertemplate*{title separator}
+\begin{minipage}{0.5\textwidth}
+\scriptsize
+\uline{Chris Kedzie} and Kathleen McKeown\\
+\scriptsize \textit{kedzie@cs.columbia.edu}
+\end{minipage}\begin{minipage}{0.5\textwidth}
+\raggedleft
+\scriptsize Columbia University\\
+\scriptsize Dept. of Computer Science
+\end{minipage}
+%\footnotesize Columbia University\\[-3pt]
+%\footnotesize Department of Computer Science\\[7pt]
+%\footnotesize \textit{kedzie@cs.columbia.edu}\\}
+
+\end{frame}
 
 \begin{frame}
 \begin{itemize}
@@ -114,8 +187,8 @@ Department of Computer Science\\
 \input{sections/alignment_training.tex}
 \input{sections/phrase_data_augmentation.tex}
 \input{sections/other_linearization_strategies.tex}
-%\input{sections/utterance_planners.tex}
-
+\input{sections/utterance_planners.tex}
+\input{sections/experiments.tex}
 
 
 
