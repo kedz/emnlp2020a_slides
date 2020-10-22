@@ -1,6 +1,6 @@
-\section{Motivation}
+\section{Background and Motivation}
 
-\begin{frame}{MR-to-Text}
+\begin{frame}{Meaning Representation-to-Text Generation}
     \begin{center}
         \begin{tikzpicture}
             \node[anchor=north west] at (0,1.0)
@@ -8,7 +8,7 @@
             \only<1-6>{
                 \node[anchor=north west] (mr) at (0,0) 
                     {$\left[\!\!\!\left[ \begin{array}{l} 
-                        \textsc{Inform} \\ 
+                        \textscorig{Inform} \\ 
                         \textrm{name=Aromi} \\ 
                         \textrm{eat\_type=coffee shop} \\ 
                         \textrm{area=city centre} \\ 
@@ -106,117 +106,9 @@
     \end{center}
 \end{frame}
 
-
-
-\begin{frame}{NLG as Seq2Seq}
-   
-    \resizebox{\textwidth}{!}{
-    \begin{tikzpicture}
-   \uncover<1-3>{
-       \node[align=left,text width=10cm,anchor=north west] at (0,0) {\texttt{{\color{mLightBrown}\# Input}\\x = ?}};
-   }
-
-   \uncover<4>{
-       \node[align=left,text width=10cm,anchor=north west] at (0,0) {\texttt{{\color{mLightBrown}\# Input}\\x = [\\~\\~\\~\\~\\~\\~\\]}};
-   }
-   \uncover<3-4>{
-       \node[anchor=west] at (0.5,-2.8) 
-       {\resizebox{5.5cm}{!}{$\uncover<4>{\pi = \left(} \left[\!\!\!\left[ \begin{array}{l}
-        \textsc{Inform}\\
-        \textrm{name=Aromi}\\
-        \textrm{eat\_type=coffee shop}\\
-        \textrm{area=city centre}\\
-    \end{array}\right]\!\!\!\right]\uncover<4>{\right)}$ }};
-
-   }
-   \uncover<5->{
-       \node[align=left,text width=10cm,anchor=north west] at (0,0) {\texttt{{\color{mLightBrown}\# Input}\\x = [\\
-                    ~~~~"<start>",\\
-                ~~~~"inform",\\
-                ~~~~"name=Aromi",\\
-                ~~~~"eat\_type=coffee shop",\\
-                ~~~~"area=city centre",\\
-                ~~~~"<stop>"\\
-            ]\\~
-   }};
-}
-   \uncover<1>{
-       \node[align=left,text width=5.75cm,anchor=north west] at (6.2,0) {\texttt{{\color{mLightBrown}\# Output}\\y = ?}};
-   }
-   \uncover<2->{
-         \node[align=left,text width=5.75cm,anchor=north west] at (6.2,0) {\texttt{{\color{mLightBrown}\# Output}\\y = [\\ 
-                    ~~~~"<start>",\\ 
-                    ~~~~"for",\\
-                    ~~~~"coffee",\\
-                    ~~~~"in",\\
-                    ~~~~"the",\\
-                    ~~~~"city",\\
-                    ~~~~"centre",\\ 
-                    ~~~~",",\\
-                    ~~~~"try",\\
-                    ~~~~"aromi",\\
-                    ~~~~".",\\
-                    ~~~~"<stop>"\\
-                ] \\ ~
-   }};
-   }
-
-   \draw[mLightBrown!30] (6.2,0) -- (6.2,-8.15);
-   \draw[mLightBrown!30] (0,0) -- (0,-4.85);
-    \end{tikzpicture}
-}
-\end{frame}
-
-
-\begin{frame}{NLG as Seq2Seq}
-
-    \begin{center}
-    \begin{tikzpicture}
-
-        \node[draw=black,text width=3.5cm,minimum height=1.5cm,align=center] (enc) at (1.5,2) {Encoder};
-        \node[draw=black,text width=3.5cm,minimum height=1.5cm,align=center] (dec) at (7.5,2) {Decoder};
-
-        \draw[->] (enc.east) -- (dec.west);
-
-        \node (x1) at (0,0) {$x_1$};
-        \node (x2) at (1,0) {$x_2$};
-        \node (x3) at (2,0) {$\cdots$};
-        \node (xn) at (3,0) {$x_m$};
-
-
-        \draw[->] (x1.north) -- +(0,1);
-        \draw[->] (x2.north) -- +(0,1);
-        \draw[->] (xn.north) -- +(0,1);
-
-        \node (y1) at (6,0) {$y_1$};
-        \node (y2) at (7,0) {$y_2$};
-        \node (y3) at (8,0) {$\cdots$};
-        \node (yn) at (9,0) {$y_{n-1}$};
-        \draw[->] (y1.north) -- +(0,1);
-        \draw[->] (y2.north) -- +(0,1);
-        \draw[->] (yn.north) -- +(0,1);
-
-        \node (o1) at (6,4) {$y_2$};
-        \node (o2) at (7,4) {$y_3$};
-        \node (o3) at (8,4) {$\cdots$};
-        \node (on) at (9,4) {$y_{n}$};
-
-        \draw[->] (o1)+(0,-1.25) -- (o1.south);
-        \draw[->] (o2)+(0,-1.25) -- (o2.south);
-        \draw[->] (on)+(0,-1.25) -- (on.south);
-
-    \end{tikzpicture}
-    \end{center}
-
-Encoder/Decoder is either a GRU w/ Attention or Transformer.
-
-\end{frame}
-
-
-\begin{frame}{Controllable Generation}
-            Surface realization order is determined by encoder, not the decoder language model.
-
-~\\
+\begin{frame}{Controllable MR-to-Text Generation}
+%            Surface realization order is determined by encoder, not the decoder language model.
+%~\\
             
         \begin{center}
     \resizebox{0.95\textwidth}{!}{
@@ -252,14 +144,18 @@ Encoder/Decoder is either a GRU w/ Attention or Transformer.
 \end{frame}
 
 
-\begin{frame}{Controllable Generation}
 
 
-    Controllable generation will allow us to 
+
+\begin{frame}{Controllable MR-to-Text Generation}
+
+
+    Controllable MR-to-Text Generation will allow us to 
     \begin{itemize}
         \item implement more cognitively plausible
-    discourse structuring models, and 
-\item more easily generate diverse outputs.
+            discourse structuring models (e.g. Centering Theory or Accessibility Theory), 
+\item more easily generate diverse outputs, and
+\item confidently use neural components in NLG pipelines (Moryossef et al. (2019), Castro Ferreira et al. (2019))
     \end{itemize}
     
 
@@ -270,11 +166,12 @@ Encoder/Decoder is either a GRU w/ Attention or Transformer.
 \begin{frame}{Questions}
 \begin{itemize}
 \item Can you make an arbitrary sequence2sequence model controllable?
-\item Are there differences in systematicity between recurrent models or
+    \begin{itemize}
+\item Are there differences between recurrent models or
 transformers?
 \item What about large pretrained models?
-\item How systematic is a controllable sequence2sequence model?
-\item Can we improve systematicity with data-augmentation?
-\item How do different linearization strategies compare on faithfulness?
+    \end{itemize} ~\\~\\
+\item How systematic is a controllable sequence2sequence model? \\~\\
+\item Can we improve systematicity with data-augmentation?~\\~\\
 \end{itemize}
 \end{frame}

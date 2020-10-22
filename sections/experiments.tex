@@ -1,19 +1,268 @@
 \section{Experiments}
-\begin{frame}{Experiments}
- \textbf{Models}   
-\begin{itemize}
-    \item biGRU w/ Attention
-    \item Transformer
-    \item BART (fine-tuned)
-\end{itemize}
 
-\textbf{Datasets}
-\begin{itemize}
-    \item E2E Challenge Dataset
-    \item ViGGO Dataset
-\end{itemize}
+\begin{frame}{Datasets}
+
+ % \begin{columns}
+ %   \begin{column}{0.5\textwidth}
+%      \textbf{Datasets}
+%      \begin{itemize}
+%        \item E2E Challenge Dataset
+%        \item ViGGO Dataset
+%      \end{itemize}
+ %   \end{column}
+ % \end{columns}
+
+~\\
+
+  \centering
+  \def\checkmark{\tikz\fill[scale=0.4,Green](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+  {\footnotesize
+    \begin{tabular}{ccccccc}
+      \toprule
+      &    \alert<2>{Train} & \alert<5>{Aug.} & Valid & Test & \alert<3>{\# Dia. Acts} & \# \alert<3>{Attr.} \\
+        \midrule
+        E2E Chal.   &         {3}3,523 &         {4}43,192     
+                    &            4,297 &             4,693 
+                    &                1 &      \phantom{0}8 \\
+        ViGGO       & \phantom{0}5,103 & \phantom{0}67,445 
+                    &  \phantom{0,}714 &             1,083 
+                    &                9 &                13 \\
+        \bottomrule
+      \end{tabular}
+
+    ~\\~\\~\\
+
+      \begin{tabular}{cccccc}
+        \toprule
+        & \multicolumn{5}{c}{\alert<4>{Value Types}}\\
+        \cmidrule(lr){2-6}
+          & Boolean & Scalar & Categorical & Lists & Free-Text\\
+        \midrule
+        E2E Chal. & \checkmark & \checkmark & \checkmark &
+                           --- &        --- \\
+        ViGGO     & \checkmark & \checkmark & \checkmark & 
+                    \checkmark & \checkmark \\
+        \bottomrule
+      \end{tabular}
+  }
+
 \end{frame}
 
-\begin{frame}{Metrics}
-some metrics
+\begin{frame}{Models}
+
+      \textbf{Generation Models}\\Utterances generated with Beam Search + Reranking
+      \begin{itemize}
+        \item biGRU w/ Attention
+        \item Transformer
+        \item BART (fine-tuned)
+      \end{itemize}~\\~\\
+
+      
+
+      \textbf{Attribute-Value Alignment/Tagging Model}   
+      \begin{itemize}
+        \item rule based
+        \item manually validated on the training set ($\approx 100\%$ correctly tags and aligns training set examples
+      \end{itemize}
+
+
+
+
 \end{frame}
+
+\begin{frame}{Evaluation Measures}
+    \textbf{Automatic String Overlap Measures} (using E2E challenge eval script)
+    \begin{itemize}
+    \item \textsc{Rouge-L} F1
+        \item \textsc{Bleu}
+    \end{itemize}
+    \textbf{Semantic and Order Measures}
+    \begin{itemize}
+        \item \textsc{Semantic Error Rate (SER)} \[\textsc{SER} \triangleq \frac{\textrm{\#missing} + \textrm{\#wrong} + \textrm{\#added}   }{\textrm{\#attributes}}\]
+            Attribute-values automatically tagged + manual correction.
+        \item Order Accuracy (OA) \[\textsc{OA} = \triangleq \frac{\sum_{\mathbf{x} \in \mathcal{D}}\mathds{1}\left\{\textrm{generated utterance }\boldsymbol{\hat{\mathbf{y}}} \textrm{ follows plan } \mathbf{x}  \right\}  }{\vert\mathcal{D}\vert }\]
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Results}
+
+
+\end{frame}
+
+\begin{frame}{Alignment Training Yields Highly Controllable Model\\
+        In Large Data Setting}
+
+        \begin{tabular}{cccccc}
+            \toprule
+            & & \multicolumn{4}{c}{E2E} \\
+            \cmidrule(lr){3-6} 
+          Model & Plan & \textsc{Bleu} & \textsc{Rouge} & SER (\%)$\downarrow$ & OA (\%)$\uparrow$ \\
+            \midrule
+    biGRU & \textsc{BgUP} & 66.4 & 68.3 & \textbf{0.26} & 98.2 \\
+          & \textsc{NUP} & 66.3 & 68.9 & \textbf{0.26} & \textbf{98.3} \\
+          & \textsc{Oracle} & \textbf{69.3} & \textbf{77.3} & 0.84 & 94.3 \\
+            \midrule
+            {\footnotesize Transformer} & \textsc{BgUP} & 66.8 & 68.4 & \textbf{0.00} & 99.9 \\
+          & \textsc{NUP} & 67.0 & 69.0 & \textbf{0.00} & \textbf{100.0} \\
+          & \textsc{Oracle} & \textbf{69.3} & \textbf{77.0} & 0.76 & 95.0 \\
+%            \midrule
+%            BART & \textsc{BgUP} & 66.2 & 68.7 & \textbf{0.20} & \textbf{98.6} \\
+%             & \textsc{NUP} & 66.6 & 69.2 & \textbf{0.20} & \textbf{98.6} \\
+%          & \textsc{Oracle} & \textbf{68.3} & \textbf{77.1} & 0.70 & 95.3 \\
+            \bottomrule
+        \end{tabular}
+        \begin{itemize}
+     %       \item Little difference between \textsc{BgUP} and NUP on SER and OA.
+            \item Model plans are easier to follow than \textsc{Oracle} (i.e. human).
+        \end{itemize}
+\end{frame}
+
+\begin{frame}{Alignment Training Yields (Slightly Less) Control\\
+        In Small Data Setting}
+
+        \begin{tabular}{cccccc}
+            \toprule
+            & & \multicolumn{4}{c}{ViGGO} \\
+            \cmidrule(lr){3-6} 
+          Model & Plan & \textsc{Bleu} & \textsc{Rouge} & SER (\%)$\downarrow$ & OA (\%)$\uparrow$ \\
+            \midrule
+    biGRU & \textsc{BgUP} & 48.5 & 58.5 & 3.40 & 89.8 \\
+          & \textsc{NUP} & 51.8 & 62.6 & \textbf{1.58} & \textbf{93.7} \\
+          & \textsc{Oracle} & \textbf{54.1} & \textbf{65.5} & 2.42 & 92.2 \\
+            \midrule
+            BART & \textsc{BgUP} & 43.8 & 54.0 & \textbf{0.52} & \textbf{98.3} \\
+          & \textsc{NUP} & 45.5 & 57.6 & 0.54 & 98.2 \\
+          & \textsc{Oracle} & \textbf{47.1} & \textbf{60.4} & 0.82 & 97.2 \\
+%            \midrule
+%            BART & \textsc{BgUP} & 66.2 & 68.7 & \textbf{0.20} & \textbf{98.6} \\
+%             & \textsc{NUP} & 66.6 & 69.2 & \textbf{0.20} & \textbf{98.6} \\
+%          & \textsc{Oracle} & \textbf{68.3} & \textbf{77.1} & 0.70 & 95.3 \\
+            \bottomrule
+        \end{tabular}
+        \begin{itemize}
+           % \item Higher semantic error rate and lower order accuracy than on E2E Chal.
+            \item Trained from scratch models (biGRU) have higher \textsc{Bleu} and \textsc{Rouge} but more semantic errors than BART!
+           % \item Model plans are easier to follow than \textsc{Oracle} (i.e. human).
+        \end{itemize}
+\end{frame}
+
+
+\begin{frame}{Random Permutation Stress Test}
+
+    {\Large \textbf{Following NUP is relatively easy.}}\\
+    \begin{itemize}
+        \item Plans are coming from the training distribution.
+        \item Models have lower entropy than humans.
+    \end{itemize}~\\
+
+    {\Large \textbf{Can a model follow a random plan?}}
+        \begin{itemize}
+               \item Randomly generate plans i.e. random permutations of attribute-value sequences.
+               \item Evaluate Semantic Error Rate and Order Accuracy. 
+           \end{itemize}
+        
+
+\end{frame}
+
+\begin{frame}{Training Distribution VS Permutation Distribution}
+    \begin{center}
+    \begin{tabular}{llcc}
+        \toprule
+        & & \multicolumn{2}{c}{SER (\%)$\downarrow$} \\
+            \cmidrule(lr){3-4} 
+            \multicolumn{2}{c}{Model} & E2E  & ViGGO \\
+            \midrule
+            biGRU& NUP & \textbf{0.22} & \textbf{9.62} \\
+                 & Rand  & 1.14          & 13.58 \\
+            \midrule
+            Transformer & NUP & \textbf{0.08} & \textbf{24.18} \\
+              &Rand &     0.78   &   28.34 \\
+            \midrule
+            BART & NUP & 0.64 & \textbf{1.34} \\
+                 &Rand &          \textbf{0.42} & 2.30 \\
+    \bottomrule
+\end{tabular}\end{center}
+    \begin{itemize}
+\item Random permutations \textbf{harder to follow} than NUP plan (except E2E BART!)\end{itemize}
+\end{frame}
+
+\begin{frame}{\textbf{Data Augmentation} in \textbf{Large Data} Setting (E2E)}
+    \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}
+        \node at (0,0) {
+    \begin{tabular}{llcc}
+        \toprule
+        & & \multicolumn{2}{c}{E2E} \\
+            \cmidrule(lr){3-4} 
+            \multicolumn{2}{c}{Model} & SER (\%)$\downarrow$   & OA (\%)$\uparrow$ \\
+            \midrule
+            \multicolumn{2}{l}{biGRU} & 1.14 & 94.44 \\
+                                      &\alert{+DataAug} & \textbf{0.54} & \textbf{97.34} \\
+            \midrule
+            \multicolumn{2}{l}{Transformer} & 0.78 & 95.20 \\
+                                            &\alert{+DataAug} & \textbf{0.40} & \textbf{98.10} \\
+            \midrule
+            \multicolumn{2}{l}{BART} & 0.42 & 97.78 \\
+                                     &\alert{+DataAug} & \textbf{0.22} & \textbf{98.78} \\
+    \bottomrule
+    \end{tabular}};
+
+    \node[text width=11cm,align=left,font=\Large,anchor=north] at (0,-3.15) { 
+\begin{itemize} \item \textbf{+DataAug improves representation} ~~~~~~~~ of arbitrary permutations. \end{itemize}};
+\end{tikzpicture}
+}
+\end{frame}
+
+\begin{frame}{\textbf{Data Augmentation} in \textbf{Small Data} Setting (ViGGO)}
+    \resizebox{\textwidth}{!}{%
+    \begin{tikzpicture}
+        \node at (0,0) {
+    \begin{tabular}{llcc}
+        \toprule
+        & & \multicolumn{2}{c}{ViGGO} \\
+            \cmidrule(lr){3-4} 
+            \multicolumn{2}{c}{Model} & SER (\%)$\downarrow$   & OA (\%)$\uparrow$ \\
+            \midrule
+            \multicolumn{2}{l}{biGRU} & \textbf{13.58} & 46.72 \\
+                            &+DataAug & 14.46 & \textbf{49.26} \\
+            \midrule
+            \multicolumn{2}{l}{Transformer} & 28.34 & \textbf{18.70} \\
+                                  &+DataAug & \textbf{25.72} & 18.10 \\
+            \midrule
+            \multicolumn{2}{l}{BART} & 2.30 & 82.00 \\
+                                             &\alert{+DataAug} & \textbf{1.82} & \textbf{87.98} \\
+    \bottomrule
+    \end{tabular}};
+
+    \node[text width=11cm,align=left,font=\Large,anchor=north] at (0,-3.15) { 
+        \begin{itemize}
+            %\item  Mixed results on trained from scratch models.
+        \item \textbf{BART+DataAug improves representation} 
+            of arbitrary permutations.
+    \end{itemize}
+        };
+\end{tikzpicture}
+}
+\end{frame}
+
+
+%?
+%?\begin{frame}{Random Permutation Stress Test}
+%?    \begin{tabular}{llcccc}
+%?        \toprule
+%?        & & \multicolumn{2}{c}{E2E} & \multicolumn{2}{c}{ViGGO} \\
+%?            \cmidrule(lr){3-4} \cmidrule(lr){5-6}
+%?            \multicolumn{2}{c}{Model} & SER (\%)$\downarrow$   & OA (\%)$\uparrow$ & SER (\%)$\downarrow$   & OA (\%)$\uparrow$\\
+%?            \midrule
+%?            \multicolumn{2}{l}{biGRU} & 1.14 & 94.44 & \textbf{13.58} & 46.72 \\
+%?                                      &+DataAug & \textbf{0.54} & \textbf{97.34} & 14.46 & \textbf{49.26} \\
+%?            \midrule
+%?            \multicolumn{2}{l}{Transformer} & 0.78 & 95.20 & 28.34 & \textbf{18.70} \\
+%?                                            &+DataAug & \textbf{0.40} & \textbf{98.10} & \textbf{25.72} & 18.10 \\
+%?            \midrule
+%?            \multicolumn{2}{l}{BART} & 0.42 & 97.78 & 2.30 & 82.00 \\
+%?                                     &+DataAug & \textbf{0.22} & \textbf{98.78} & \textbf{1.82} & \textbf{87.98} \\
+%?    \bottomrule
+%?    \end{tabular}
+%?\end{frame}

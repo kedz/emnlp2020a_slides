@@ -1,0 +1,30 @@
+\section{Conclusion}
+
+\begin{frame}{Takeaways}
+\begin{itemize}
+\item Can you make an arbitrary sequence2sequence model controllable? 
+    \\ \uncover<2->{\textbf{To some degree, Yes!}}
+
+    \begin{itemize}
+\item Are there differences between recurrent models or
+    transformers? \\ \uncover<3->{\textbf{Recurrent models fair better in smaller data settings.}}
+\item What about large pretrained models? \\ \uncover<4->{\textbf{These work great and you should use them when dataset is small.}}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Takeaways}
+\begin{itemize}
+\item How systematic is a controllable sequence2sequence model? \\
+    \uncover<2->{\textbf{In the large data setting, pretty well!}}\\
+    \uncover<3->{\textbf{In the small data setting, error increases on arbitrary plans.}}\\
+    \uncover<4->{\textbf{The best bet is to fine-tune a large, pretrained LM.}}\\
+\item Can we improve systematicity with data-augmentation?\\
+    \uncover<5->{\textbf{Yes, but only really reliably on a large data setting, where we don't need to do it :( }}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Thank You For Watching!}
+add links to github and code/data/etc.
+\end{frame}

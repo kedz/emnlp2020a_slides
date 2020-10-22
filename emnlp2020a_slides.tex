@@ -1,4 +1,7 @@
 \documentclass[usenames,dvipsnames]{beamer}
+\let\textmdorig\textmd
+\let\textscorig\textsc
+\let\textttorig\texttt
 
 \mode<presentation> {
     \usetheme{metropolis}
@@ -9,7 +12,7 @@
 \usepackage{tikz}
 \usepackage{tikz-3dplot}
 \usetikzlibrary{calc}
-
+\usepackage{dsfont}
 
 \newcommand{\tikzmark}[1]{\tikz[overlay,remember picture] \node (#1) {};}
 
@@ -31,8 +34,8 @@
 \usepackage{ulem}
 \usepackage[backend=biber]{biblatex}
 \bibliography{cites.bib}
-%\usefonttheme[onlymath]{serif}
-\usefonttheme{serif}
+\usefonttheme[onlymath]{serif}
+%\usefonttheme{serif}
 \setbeamertemplate{navigation symbols}{}
 
 \newcolumntype{g}{>{\columncolor{black!5}}c}
@@ -61,14 +64,6 @@
 
 
                   \title[CMR2Text]{AHH}
-%?
-%?          %  $\left[\begin{array}{l}\textrm{Meaning}\\\textrm{Representation}\end{array} \right]$\\
-%?            Controllable{(~~$\llbracket$Meaning Representation$\rrbracket$~~)} \\
-%?                $\underrightarrow{\textrm{~~to~~}}$ ~~~~~\phantom{\texttt{["Text", "Generation"]}}\\
-%?              \phantom{$\underrightarrow{\textrm{~~to~~}}$} \vspace{-2.2em}~~~~~\texttt{["Text", "Generation"]}
-%?            }
-%?%{\small Linearization and Data-Augmentation Strategies}} 
-
 
 \author[Chris Kedzie]{Chris Kedzie and Kathleen McKeown} 
 \institute[Columbia U.]
@@ -162,18 +157,6 @@ Department of Computer Science\\
 
 \end{frame}
 
-\begin{frame}
-\begin{itemize}
-\item MR 2 Text Generation
-\item CMR 2 Text Generation
-\item  MR 2 Text in S2S models
-\item Alignment Training
-\item Planning models
-\item Some other alignments
-\item Results
-\end{itemize}
-\end{frame}
-
 \input{sections/motivation.tex}
 \begin{frame}{Overview}
 \tableofcontents[ 
@@ -183,12 +166,13 @@ Department of Computer Science\\
 \end{frame}
 
 \section{Controllable Generation}
-
+\input{sections/cg_s2s.tex}
 \input{sections/alignment_training.tex}
-\input{sections/phrase_data_augmentation.tex}
-\input{sections/other_linearization_strategies.tex}
 \input{sections/utterance_planners.tex}
+\input{sections/phrase_data_augmentation.tex}
+%\input{sections/other_linearization_strategies.tex}
 \input{sections/experiments.tex}
+\input{sections/conclusion}
 
 
 

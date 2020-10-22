@@ -1,4 +1,8 @@
-\section{Utterance Planning Models}
+\subsection{Utterance Planning Models}
+
+\begin{frame}
+\subsectionpage
+\end{frame}
 
 \begin{frame}{What's the plan at test time?}
 
@@ -59,7 +63,7 @@
 
 \textbf{Bigram Utterance Planner} (\textsc{BgUP})\\
 \begin{itemize}
-\item Use training data to esitmate bigram LM over attribute-value sequeunces.\\
+\item Use training data to estimate bigram LM over attribute-value sequeunces.\\
 ~\\
 $p(\textit{<<s>>})\times p(\textit{eat\_type=coffee shop}|\textit{<<s>>})\times p(\textit{area=city centre}|\textit{eat\_type=coffee shop})
 \times p(\textit{name=Aromi}|\textit{area=city centre})\times
@@ -74,11 +78,11 @@ p(\textit{<<e>>}|\textit{name=Aromi})$\\~\\
 
 \textbf{Neural Utterance Planner} (\textsc{NUP})\\
 Train a seq2seq model to map:
-\begin{center}\vspace{-12pt}\small Increasing Frequency $\rightarrow$ Alignment Training\end{center}
+\begin{center}\vspace{-12pt}\small Arbitrary Linearization $\rightarrow$ Alignment Training\end{center}
 
 \resizebox{\textwidth}{!}{
 \begin{tikzpicture}
-    \node (mr) at (0, 1) {$\textsc{IncFreq}\left(\left[\!\!\!\left[
+    \node (mr) at (0, 1) {$\textsc{Arb.}\left(\left[\!\!\!\left[
         \begin{array}{l}
             \textsc{Inform}\\
             \textrm{eat\_type=coffee shop}\\ 
